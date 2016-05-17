@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+  <layout class="org.apache.log4j.PatternLayout">
+  	<param name="ConversionPattern" value="[%-5p] %d{yyyy-MM-dd HH:mm:ss} method:%l%n%m%n" />
+  </layout>
+</appender>
+
+<appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+  <param name="File" value="log/jira.log"/>
+  <layout class="org.apache.log4j.PatternLayout">
+  	<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss}  [ %p ]  %m%n" />
+  </layout>
+</appender>
+
+ <root>
+  <priority value="info" />
+  <appender-ref ref="CONSOLE" />
+  <appender-ref ref="FILE" />
+ </root>
+</log4j:configuration>

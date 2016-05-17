@@ -1,0 +1,6 @@
+/*.bak
+/log
+/*.class
+/target/classes/Benmu
+/target/test-classes
+/.settings
