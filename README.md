@@ -1,0 +1,5 @@
+利用Jira提供的java API工具，实现对jira上的信息进行获取、整理，并向指定用户发送邮件。
+
+runable目录下是可执行jar包，要保持jar文件与log4j.xml和config.properties在同级目录下。
+
+shell目录下是部署在linux下所需的文件，使用crontab做定时任务。
