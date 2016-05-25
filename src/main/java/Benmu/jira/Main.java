@@ -9,7 +9,6 @@ import java.text.ParseException;
 import java.util.concurrent.ExecutionException;
 import javax.mail.MessagingException;
 
-
 public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException, MessagingException, ParseException {
     	//DOMConfigurator.configureAndWatch("log4j.xml");
@@ -26,11 +25,16 @@ public class Main {
     	
     	Service service = new Service();
     	service.init();
-	    service.showTotalInfo();
-    	service.showSomedayCreatedIssues();
-    	service.showSomedayResolvedIssues();
+	    service.showAllTotalIssues();
+    	
+	    service.showUnresolvedIssues();
+	    service.showSomedayCreatedIssues();
+	    service.showSomedayResolvedIssues();
     	service.showSomedayClosedIssues();
-    	service.showUnsolvedAssignee();
+    	
+    	// 统计"未解决"问题经办人排行，目前暂时关闭。
+    	// service.showUnsolvedAssignee();
+    	
     	Email email = new Email();
     	email.sendDaily();
     	System.exit(0); 

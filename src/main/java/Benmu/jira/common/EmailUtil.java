@@ -70,11 +70,13 @@ public class EmailUtil {
 
         // 设置抄送
         List<String> ccList = Configuration.getEmailCcList();
-        InternetAddress[] ccArray = new InternetAddress[ccList.size()];
-        for (int i = 0; i < ccList.size(); i++){ 
-        	ccArray[i] = new InternetAddress(ccList.get(i)); 
-        } 
-        message.setRecipients(RecipientType.CC, ccArray);
+        if (!ccList.get(0).equals("")) {
+        	InternetAddress[] ccArray = new InternetAddress[ccList.size()];
+	        for (int i = 0; i < ccList.size(); i++){ 
+	        	ccArray[i] = new InternetAddress(ccList.get(i)); 
+	        } 
+	        message.setRecipients(RecipientType.CC, ccArray);
+        }
 
         // 设置密送，其他的收件人不能看到密送的邮件地址
         //InternetAddress bcc = new InternetAddress("aaaaa@163.com");

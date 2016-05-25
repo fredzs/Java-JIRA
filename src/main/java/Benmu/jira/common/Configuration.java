@@ -28,12 +28,12 @@ public class Configuration {
 	        valMap.put(key, value);
 	    }
 	    // 收件人和抄送人都支持多个，用分号分割
-	    String to=valMap.get("emailTo"); 
-	    String[] toArray=to.split(";"); 
+	    String to=valMap.get("emailTo");
+	    String[] toArray=to.split(";");
 	    Collections.addAll(emailToList, toArray);
 
-	    String cc=valMap.get("emailCc"); 
-	    String[] ccArray=cc.split(";"); 
+	    String cc=valMap.get("emailCc");
+	    String[] ccArray=cc.split(";");
 	    Collections.addAll(emailCcList, ccArray);
 	    
 	    String pl=valMap.get("projectList"); 
