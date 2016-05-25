@@ -1,0 +1,11 @@
+#!/bin/sh
+#source /etc/profile
+
+## echo the date to the console every
+# 15minutes between 6pm and 6am
+# 0,15,30,45 18-06 * * * /bin/echo 'date' > /dev/console
+
+## send jira email everyday
+# for test : per 15 minutes on every hour, from Monday to Friday
+# 10 * * * 1-5 /etc/profile;/bin/sh /home/zhangsheng/jira/run.sh  
+0 18 * * 1-5 /home/zhangsheng/jira/run.sh
