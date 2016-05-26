@@ -188,7 +188,7 @@ public class Service {
 			
 			// 待解决（百分比）：
 			String JQL1 = "status in (open, \"In Progress\") AND project = \"" + projectKey + "\" AND createdDate > \"" + Configuration.getValMap().get("beginDate") + "\"";
-			logger.info("查询语句：" + JQL1);
+			logger.info("待解决，查询语句：" + JQL1);
 			SearchResult result1 = JIRAUtil.findIssuesByJQL(JQL1);
 			count = result1.getTotal();
 			percent = (double) count / totalIssues;
@@ -196,7 +196,7 @@ public class Service {
         	
         	// 已解决（百分比）
         	String JQL2 = "status in (Resolved) AND project = \"" + projectKey + "\" AND createdDate > \"" + Configuration.getValMap().get("beginDate") + "\"";
-			logger.info("查询语句：" + JQL2);
+			logger.info("已解决，查询语句：" + JQL2);
 			SearchResult result2 = JIRAUtil.findIssuesByJQL(JQL2);
 			count = result2.getTotal();
 			percent = (double) count / totalIssues;
@@ -204,7 +204,7 @@ public class Service {
         	
         	// 已关闭（百分比）
         	String JQL3 = "status in (Closed) AND project = \"" + projectKey + "\" AND createdDate > \"" + Configuration.getValMap().get("beginDate") + "\"";
-			logger.info("查询语句：" + JQL3);
+			logger.info("已关闭，查询语句：" + JQL3);
 			SearchResult result3 = JIRAUtil.findIssuesByJQL(JQL3);
 			count = result3.getTotal();
 			percent = (double) count / totalIssues;
@@ -212,7 +212,7 @@ public class Service {
         	
         	// 今日新建：
         	String JQL4 = "project = \"" + projectKey + "\" AND createdDate > \"" + Configuration.getValMap().get("endDate") + "\"";
-			logger.info("查询语句：" + JQL4);
+			logger.info("今日新建，查询语句：" + JQL4);
 			SearchResult result4 = JIRAUtil.findIssuesByJQL(JQL4);
 			count = result4.getTotal();
 			percent = (double) count / totalIssues;
@@ -220,7 +220,7 @@ public class Service {
         	
         	// 今日解决
         	String JQL5 = "status in (Resolved) AND project = \"" + projectKey + "\" AND resolutiondate > \"" + Configuration.getValMap().get("endDate") + "\"";
-			logger.info("查询语句：" + JQL5);
+			logger.info("今日解决，查询语句：" + JQL5);
 			SearchResult result5 = JIRAUtil.findIssuesByJQL(JQL5);
 			count = result5.getTotal();
 			percent = (double) count / totalIssues;
@@ -229,7 +229,7 @@ public class Service {
         	
         	// 今日关闭
         	String JQL6 = "status in (Closed) AND project = \"" + projectKey + "\" AND resolutiondate > \"" + Configuration.getValMap().get("endDate") + "\"";
-			logger.info("查询语句：" + JQL6);
+			logger.info("今日关闭，查询语句：" + JQL6);
 			SearchResult result6 = JIRAUtil.findIssuesByJQL(JQL6);
 			count = result6.getTotal();
 			percent = (double) count / totalIssues;
@@ -282,7 +282,7 @@ public class Service {
 	public void showUnresolvedIssues() throws InterruptedException, ExecutionException {
 		// 下方的这个projectQuerySet是根据配置文件中的projectList构造的，目的是减小统计范围。
 		String JQL = "status in (open, \"In Progress\") AND created>=\"" + Configuration.getValMap().get("beginDate") + "\"" + JIRAUtil.getProjectQuerySet() + "ORDER BY created DESC";
-		logger.info("查询语句：" + JQL);
+		logger.info("目前待解决的问题，查询语句：" + JQL);
 		Email.appendContent("<h2>二、目前待解决的问题</h2>");
 		Email.appendContent(makeContentForSimpleIssues("目前待解决的问题共有", makeSimpleIssuesFromJQL(JQL), JQL));
 	}
@@ -290,7 +290,7 @@ public class Service {
 	public void showSomedayCreatedIssues() throws InterruptedException, ExecutionException {
 		// 下方的这个projectQuerySet是根据配置文件中的projectList构造的，目的是减小统计范围。
 		String JQL = "created >= \"" + Configuration.getValMap().get("endDate") + "\"" + JIRAUtil.getProjectQuerySet() + "ORDER BY created DESC";
-		logger.info("查询语句：" + JQL);
+		logger.info("今日新增的问题，查询语句：" + JQL);
         Email.appendContent("<h2>三、今日新增的问题</h2>");
         Email.appendContent(makeContentForSimpleIssues("今日新增的问题有", makeSimpleIssuesFromJQL(JQL), JQL));
 	}
@@ -298,7 +298,7 @@ public class Service {
 	public void showSomedayResolvedIssues() throws InterruptedException, ExecutionException {
 		// 下方的这个projectQuerySet是根据配置文件中的projectList构造的，目的是减小统计范围。
 	    String JQL = "status in (Resolved) AND resolutiondate > \"" + Configuration.getValMap().get("endDate") + "\"" + JIRAUtil.getProjectQuerySet() + "ORDER BY created DESC";
-		logger.info("查询语句：" + JQL);
+		logger.info("今日解决的问题，查询语句：" + JQL);
         Email.appendContent("<h2>四、今日解决的问题（即开发已修复待测试）</h2>");
         Email.appendContent(makeContentForSimpleIssues("今日解决的问题有", makeSimpleIssuesFromJQL(JQL), JQL));
 	}
@@ -306,7 +306,7 @@ public class Service {
 	public void showSomedayClosedIssues() throws InterruptedException, ExecutionException {
 		// 下方的这个projectQuerySet是根据配置文件中的projectList构造的，目的是减小统计范围。
 	    String JQL = "status in (Closed) AND resolutiondate > \"" + Configuration.getValMap().get("endDate") + "\"" + JIRAUtil.getProjectQuerySet() + "ORDER BY created DESC";
-		logger.info("查询语句：" + JQL);
+		logger.info("今日关闭的问题，查询语句：" + JQL);
         //String timeSpent = calculateTimeSpent(searchResult.getIssues().iterator());
         Email.appendContent("<h2>五、今日关闭的问题（即已上线或者不解决关闭）</h2>");
         Email.appendContent(makeContentForSimpleIssues("今日关闭的问题有", makeSimpleIssuesFromJQL(JQL), JQL));

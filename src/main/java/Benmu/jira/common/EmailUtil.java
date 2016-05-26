@@ -54,11 +54,14 @@ public class EmailUtil {
         Session mailSession = Session.getInstance(props, authenticator);
         // 创建邮件消息
         MimeMessage message = new MimeMessage(mailSession);
+        
+        // 设置优先级
+        message.setHeader("X-Priority", "1"); 
         // 设置发件人
         InternetAddress form = new InternetAddress(
                 props.getProperty("mail.user"));
         message.setFrom(form);
-
+        
         // 设置收件人
         //InternetAddress[] to = new InternetAddress("zhangsheng@benmu-health.com;chentianqi@benmu-health.com");
         List<String> toList = Configuration.getEmailToList();
