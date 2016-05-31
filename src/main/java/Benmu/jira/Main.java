@@ -28,9 +28,10 @@ public class Main {
 	    service.showAllTotalIssues();
     	
 	    service.showUnresolvedIssues();
-	    service.showSomedayCreatedIssues();
-	    service.showSomedayResolvedIssues();
-    	service.showSomedayClosedIssues();
+	    service.showUnclosedIssues();
+	    service.showTodayCreatedIssues();
+	    service.showTodayResolvedIssues();
+    	service.showTodayClosedIssues();
     	
     	// 统计"未解决"问题经办人排行，目前暂时关闭。
     	// service.showUnsolvedAssignee();
